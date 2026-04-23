@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+const CLI = require("../cli/CLI");
+const TaskController = require("../controllers/TaskController");
+const TaskService = require("../services/TaskService");
+const TaskRepository = require("../repositories/TaskRepository");
+const TaskFactory = require("../factories/TaskFactory");
+
+const helpers = require("../utils/helpers");
+const { TASK_FILE } = require("../config/path");
+
+const repo = new TaskRepository(TASK_FILE);
+const factory = new TaskFactory(helpers.generateId, helpers.now);
+const service = new TaskService(repo, factory, helpers);
+const controller = new TaskController(service);
+
+new CLI(controller).run();
