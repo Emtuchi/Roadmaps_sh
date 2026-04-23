@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+const { fetchEvents } = require ("../api/fetchEvents.js");
+const { formatEvents } = require ("../format/formatEvents.js");
+const { display } = require ("../output/display.js");
+
+async function main() {
+  const username = process.argv[2];
+
+  if (!(typeof username === "string" && username.trim() !== "")) {
+    console.log("Please provide a valid GitHub username");
+    process.exit(1);
+  }
+
+  const events = await fetchEvents(username);
+
+  if (!events) {
+    process.exit(1);
+  }
+
+  const messages = formatEvents(events);
+
+  display(messages);
+}
+
+main();
