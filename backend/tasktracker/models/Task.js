@@ -17,7 +17,7 @@ class Task {
         this.updatedAt = now();
     }
 
-    updatedStatus(newStatus, now) {
+    updateStatus(newStatus, now) {
         const allowed = ["todo", "in-progress", "done"];
 
         if (!allowed.includes(newStatus)) {
