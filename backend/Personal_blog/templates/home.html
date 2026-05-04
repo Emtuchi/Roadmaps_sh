@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container">
+    <h1>My Blog</h1>
+
+    {% for article in articles %}
+        <div class="card">
+            <h2>
+                <a href="/article/{{ article.id }}">
+                    {{ article.title }}
+                </a>
+            </h2>
+            <p>{{ article.date }}</p>
+        </div>
+    {% endfor %}
+</div>
